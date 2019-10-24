@@ -17,7 +17,7 @@ router.get('/categorias', function(req, res){
 router.get('/categorias/add', function(req, res){
     res.render('admin/addcategorias')
 })
-/*
+
 router.post('/categorias/nova', function(req, res){
 
     var erros = []
@@ -47,5 +47,5 @@ router.post('/categorias/nova', function(req, res){
         })
     }
 })
-*/
+
 module.exports = router
