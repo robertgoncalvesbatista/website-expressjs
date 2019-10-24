@@ -7,6 +7,7 @@ const admin = require('./routes/admin')
 const path = require('path')
 const session = require('express-session')
 const flash = require('connect-flash')
+const legal = express()
 
 //Configurações
 
