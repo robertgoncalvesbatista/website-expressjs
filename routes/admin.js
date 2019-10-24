@@ -8,7 +8,7 @@ const Categoria = mongoose.model('categorias')
 router.get('/', function(req, res){
     res.render('admin/index')
 })
-/*
+
 //Categorias
 router.get('/categorias', function(req, res){
     res.render('admin/categorias')
@@ -17,7 +17,7 @@ router.get('/categorias', function(req, res){
 router.get('/categorias/add', function(req, res){
     res.render('admin/addcategorias')
 })
-
+/*
 router.post('/categorias/nova', function(req, res){
 
     var erros = []
