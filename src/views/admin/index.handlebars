@@ -1,22 +1,3 @@
-<div class="container col-xxl-8 px-4 py-5">
-	<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-		<div class="col-10 col-sm-8 col-lg-6">
-			<img src="/img/developer-000.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
-				height="500" loading="lazy">
-		</div>
-		<div class="col-lg-6">
-			<h1 class="display-5 fw-bold lh-1 mb-3">Responsive left-aligned hero with image</h1>
-			<p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
-				popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
-				extensive prebuilt components, and powerful JavaScript plugins.</p>
-			<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-				<button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-				<button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-			</div>
-		</div>
-	</div>
-</div>
-
 <main class="container">
 	<div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
 		<img class="me-3" src="/img/bootstrap-000.png" alt="" width="48" height="38">
@@ -26,113 +7,175 @@
 		</div>
 	</div>
 
-	<div class="my-3 p-3 bg-body rounded shadow-sm">
-		<h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
-		<div class="d-flex text-muted pt-3">
-			<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-				xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-				preserveAspectRatio="xMidYMid slice" focusable="false">
-				<title>Placeholder</title>
-				<rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
-					dy=".3em">32x32</text>
-			</svg>
+	<div class="d-flex gap-5 justify-content-center">
 
-			<p class="pb-3 mb-0 small lh-sm border-bottom">
-				<strong class="d-block text-gray-dark">@username</strong>
-				Some representative placeholder content, with some information about this user. Imagine this being some
-				sort of status update, perhaps?
-			</p>
-		</div>
-		<div class="d-flex text-muted pt-3">
-			<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-				xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-				preserveAspectRatio="xMidYMid slice" focusable="false">
-				<title>Placeholder</title>
-				<rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c"
-					dy=".3em">32x32</text>
-			</svg>
+		<div class="my-3 p-3 bg-body rounded shadow-sm">
+			<h6 class="border-bottom pb-2 mb-0">Lista de Usuários</h6>
 
-			<p class="pb-3 mb-0 small lh-sm border-bottom">
-				<strong class="d-block text-gray-dark">@username</strong>
-				Some more representative placeholder content, related to this other user. Another status update,
-				perhaps.
-			</p>
-		</div>
-		<div class="d-flex text-muted pt-3">
-			<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-				xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-				preserveAspectRatio="xMidYMid slice" focusable="false">
-				<title>Placeholder</title>
-				<rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1"
-					dy=".3em">32x32</text>
-			</svg>
+			{{#each users}}
+			<div class="d-flex text-muted pt-3">
+				<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+					xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+					preserveAspectRatio="xMidYMid slice" focusable="false">
+					<title>Placeholder</title>
+					<rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
+						dy=".3em">32x32</text>
+				</svg>
 
-			<p class="pb-3 mb-0 small lh-sm border-bottom">
-				<strong class="d-block text-gray-dark">@username</strong>
-				This user also gets some representative placeholder content. Maybe they did something interesting, and
-				you really want to highlight this in the recent updates.
-			</p>
+				<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+					<div class="d-flex justify-content-between">
+						<strong class="text-gray-dark">@{{name}}</strong>
+					</div>
+					<span class="d-block">{{email}}</span>
+					<div class="btn-group">
+						<a data-bs-toggle="modal" href="#modalUpdateUser" class="link-warning px-2">Atualizar</a>
+						<a href="/deleteuser/{{_id}}" class="link-danger px-2">Excluir</a>
+					</div>
+				</div>
+			</div>
+			{{/each}}
+
+			<small class="d-block text-end mt-3">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreateUser">
+					Novo usuário
+				</button>
+			</small>
 		</div>
-		<small class="d-block text-end mt-3">
-			<a href="#">All updates</a>
-		</small>
+
+		<div class="my-3 p-3 bg-body rounded shadow-sm">
+			<h6 class="border-bottom pb-2 mb-0">Lista de Administradores</h6>
+
+			{{#each admins}}
+			<div class="d-flex text-muted pt-3">
+				<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+					xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+					preserveAspectRatio="xMidYMid slice" focusable="false">
+					<title>Placeholder</title>
+					<rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
+						dy=".3em">32x32</text>
+				</svg>
+
+				<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+					<div class="d-flex justify-content-between">
+						<strong class="text-gray-dark">@{{name}}</strong>
+					</div>
+					<span class="d-block">{{email}}</span>
+
+					<div class="btn-group">
+						<a href="/updateadmin/{{_id}}" class="link-warning px-2">Atualizar</a>
+						<a href="/deleteadmin/{{_id}}" class="link-danger px-2">Excluir</a>
+					</div>
+				</div>
+			</div>
+			{{/each}}
+
+			<small class="d-block text-end mt-3">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreateAdmin">
+					Novo administrador
+				</button>
+			</small>
+		</div>
 	</div>
 
-	<div class="my-3 p-3 bg-body rounded shadow-sm">
-		<h6 class="border-bottom pb-2 mb-0">Suggestions</h6>
-		<div class="d-flex text-muted pt-3">
-			<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-				xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-				preserveAspectRatio="xMidYMid slice" focusable="false">
-				<title>Placeholder</title>
-				<rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
-					dy=".3em">32x32</text>
-			</svg>
-
-			<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-				<div class="d-flex justify-content-between">
-					<strong class="text-gray-dark">Full Name</strong>
-					<a href="#">Follow</a>
-				</div>
-				<span class="d-block">@username</span>
-			</div>
-		</div>
-		<div class="d-flex text-muted pt-3">
-			<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-				xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-				preserveAspectRatio="xMidYMid slice" focusable="false">
-				<title>Placeholder</title>
-				<rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
-					dy=".3em">32x32</text>
-			</svg>
-
-			<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-				<div class="d-flex justify-content-between">
-					<strong class="text-gray-dark">Full Name</strong>
-					<a href="#">Follow</a>
-				</div>
-				<span class="d-block">@username</span>
-			</div>
-		</div>
-		<div class="d-flex text-muted pt-3">
-			<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-				xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-				preserveAspectRatio="xMidYMid slice" focusable="false">
-				<title>Placeholder</title>
-				<rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
-					dy=".3em">32x32</text>
-			</svg>
-
-			<div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-				<div class="d-flex justify-content-between">
-					<strong class="text-gray-dark">Full Name</strong>
-					<a href="#">Follow</a>
-				</div>
-				<span class="d-block">@username</span>
-			</div>
-		</div>
-		<small class="d-block text-end mt-3">
-			<a href="#">All suggestions</a>
-		</small>
-	</div>
 </main>
+
+<!-- Modal Create Administrator -->
+<div class="modal fade" id="modalCreateAdmin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	aria-labelledby="modalCreateAdminLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalCreateAdminLabel">Modal title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="/createadmin" method="post" id="formCreateAdmin">
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Nome:</label>
+						<input type="text" name="name" class="form-control" id="recipient-name">
+					</div>
+					<div class="mb-3">
+						<label for="recipient-email" class="col-form-label">Email:</label>
+						<input type="email" name="email" class="form-control" id="recipient-email">
+					</div>
+					<div class="mb-3">
+						<label for="recipient-password" class="col-form-label">Senha:</label>
+						<input type="password" name="password" class="form-control" id="recipient-password">
+					</div>
+					<button type="submit" class="btn btn-primary">Criar</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Create User -->
+<div class="modal fade" id="modalCreateUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	aria-labelledby="modalCreateUserLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalCreateUserLabel">Modal title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="/createuser" method="post" id="formCreateUser">
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Nome:</label>
+						<input type="text" name="name" class="form-control" id="recipient-name">
+					</div>
+					<div class="mb-3">
+						<label for="recipient-email" class="col-form-label">Email:</label>
+						<input type="email" name="email" class="form-control" id="recipient-email">
+					</div>
+					<div class="mb-3">
+						<label for="recipient-password" class="col-form-label">Senha:</label>
+						<input type="password" name="password" class="form-control" id="recipient-password">
+					</div>
+					<button type="submit" class="btn btn-primary">Criar</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Update User -->
+<div class="modal fade" id="modalUpdateUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	aria-labelledby="modalUpdateUserLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalUpdateUserLabel">Modal title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="/updateuser/{{id}}" method="post" id="formUpdateUser">
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Nome:</label>
+						<input type="text" name="name" class="form-control" id="recipient-name">
+					</div>
+					<div class="mb-3">
+						<label for="recipient-email" class="col-form-label">Email:</label>
+						<input type="email" name="email" class="form-control" id="recipient-email">
+					</div>
+					<div class="mb-3">
+						<label for="recipient-password" class="col-form-label">Senha:</label>
+						<input type="password" name="password" class="form-control" id="recipient-password">
+					</div>
+					<button type="submit" class="btn btn-primary">Atualizar</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

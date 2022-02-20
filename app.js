@@ -1,18 +1,22 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+require("./src/config/db");
+require("dotenv").config();
+
+const { urlencoded, json } = require("body-parser");
 const { engine } = require("express-handlebars");
-const path = require("path");
+const Handlebars = require("handlebars");
+const { join } = require("path");
 const session = require("express-session");
 const flash = require("connect-flash");
+const express = require("express");
+
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
+const app = express();
 
 //Configurações
-
 //Sessão
 app.use(
     session({
-        secret: "G8EaD23@$d",
+        secret: process.env.SESSION_SECRET,
         resave: true,
         saveUninitialized: true,
     })
@@ -27,33 +31,24 @@ app.use((req, res, next) => {
 });
 
 //Body Parser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: true }));
+app.use(json());
 
 //Handlebars
-app.engine("handlebars", engine({ defaultLayout: "main" }));
+app.engine("handlebars", engine({ defaultLayout: "main", handlebars: allowInsecurePrototypeAccess(Handlebars) }));
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
-//Mongoose
-const options = { useUnifiedTopology: true, useNewUrlParser: true };
-
-mongoose.Promise = global.Promise;
-mongoose
-    .connect("mongodb://localhost/g8", options)
-    .then(() => {
-        console.log("Conectado ao mongo");
-    })
-    .catch((err) => {
-        console.log("Erro ao se conectar: " + err);
-    });
 
 //Public
-app.use(express.static(path.join(__dirname, "src/public")));
+app.use(express.static(join(__dirname, "src/public")));
 
 //Rotas
-app.use("/", require("./src/routes/admin"));
+app.use("/", require("./src/routes/main"));
+// app.use("/admin", require("./src/routes/admin"));
 
 //Outros
-app.listen(8080, () => {
-    console.log("Servidor rodando! http://localhost:8080");
+app.listen(process.env.PORT, () => {
+    console.log(
+        `Servidor rodando! http://${process.env.HOST}:${process.env.PORT}`
+    );
 });
