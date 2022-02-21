@@ -13,18 +13,18 @@
                                     <h4 class="mt-1 mb-5 pb-1">User</h4>
                                 </div>
 
-                                <form action="/auth/user" method="POST">
+                                <form action="/admin/authenticate/user" method="POST">
                                     <p>Please login to your account</p>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="inputEmail">Email</label>
-                                        <input type="email" id="inputEmail" class="form-control"
+                                        <input type="email" name="email" id="inputEmail" class="form-control"
                                             placeholder="Type your e-mail here..." />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="inputPassword">Password</label>
-                                        <input type="password" id="inputPassword" class="form-control"
+                                        <input type="password" name="password" id="inputPassword" class="form-control"
                                             placeholder="Type your password here..." />
                                     </div>
 

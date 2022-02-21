@@ -14,10 +14,10 @@ module.exports = {
             }
 
             if (erros.length > 0) {
-                res.redirect("/users");
+                res.redirect("/admin/users");
             } else {
                 await User.create(req.body)
-                res.redirect("/users");
+                res.redirect("/admin/users");
             }
         } catch (error) {
             console.log("Erro: " + error)
@@ -27,7 +27,7 @@ module.exports = {
         try {
             await User.findById(req.params._id)
 
-            res.redirect("/users");
+            res.redirect("/admin/users");
         } catch (error) {
             console.log("Erro: " + error)
         }
@@ -36,7 +36,7 @@ module.exports = {
         try {
             await User.findByIdAndUpdate(req.params._id, req.body)
 
-            res.redirect("/users");
+            res.redirect("/admin/users");
         } catch (error) {
             console.log("Erro: " + error)
         }
@@ -45,7 +45,7 @@ module.exports = {
         try {
             await User.findByIdAndDelete(req.params._id)
 
-            res.redirect("/users");
+            res.redirect("/admin/users");
         } catch (error) {
             console.log("Erro: " + error)
         }
