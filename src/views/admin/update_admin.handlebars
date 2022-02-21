@@ -1,0 +1,26 @@
+<main class="container">
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        {{#with admin}}
+        <form action="/updateadmin/{{_id}}" method="POST">
+            <div class="form-group">
+                <label for="inputName">Nome:</label>
+                <input type="text" name="name" class="form-control" id="inputName" placeholder="Username"
+                    value="{{name}}">
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Email:</label>
+                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email"
+                    value="{{email}}" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com
+                    ninguém.</small>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Senha:</label>
+                <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password"
+                    value="{{password}}">
+            </div>
+            <button type="submit" class="btn btn-primary my-4">Enviar</button>
+        </form>
+        {{/with}}
+    </div>
+</main>

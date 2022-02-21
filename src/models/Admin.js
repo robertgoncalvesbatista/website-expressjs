@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const crypto = require("crypto")
 
-const Admin = new mongoose.Schema(
+const AdminSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -14,6 +15,11 @@ const Admin = new mongoose.Schema(
         password: {
             type: String,
             required: true,
+            select: false,
+            set: value => crypto
+                .createHash("md5")
+                .update(value)
+                .digest("hex")
         },
     },
     {
@@ -29,4 +35,4 @@ const Admin = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model("admins", Admin);
+module.exports = mongoose.model("Admin", AdminSchema);

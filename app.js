@@ -47,8 +47,4 @@ app.use("/", require("./src/routes/main"));
 // app.use("/admin", require("./src/routes/admin"));
 
 //Outros
-app.listen(process.env.PORT, () => {
-    console.log(
-        `Servidor rodando! http://${process.env.HOST}:${process.env.PORT}`
-    );
-});
+app.listen(process.env.PORT, () => console.log(`Servidor rodando! http://${process.env.HOST}:${process.env.PORT}`));

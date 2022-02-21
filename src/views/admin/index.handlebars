@@ -28,7 +28,7 @@
 					</div>
 					<span class="d-block">{{email}}</span>
 					<div class="btn-group">
-						<a data-bs-toggle="modal" href="#modalUpdateUser" class="link-warning px-2">Atualizar</a>
+						<a href="/user/update/{{_id}}" class="link-warning px-2">Atualizar</a>
 						<a href="/deleteuser/{{_id}}" class="link-danger px-2">Excluir</a>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 					<span class="d-block">{{email}}</span>
 
 					<div class="btn-group">
-						<a href="/updateadmin/{{_id}}" class="link-warning px-2">Atualizar</a>
+						<a href="/admin/update/{{_id}}" class="link-warning px-2">Atualizar</a>
 						<a href="/deleteadmin/{{_id}}" class="link-danger px-2">Excluir</a>
 					</div>
 				</div>
@@ -91,7 +91,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form action="/createadmin" method="post" id="formCreateAdmin">
+				<form action="/createadmin" method="POST" id="formCreateAdmin">
 					<div class="mb-3">
 						<label for="recipient-name" class="col-form-label">Nome:</label>
 						<input type="text" name="name" class="form-control" id="recipient-name">
@@ -124,7 +124,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form action="/createuser" method="post" id="formCreateUser">
+				<form action="/createuser" method="POST" id="formCreateUser">
 					<div class="mb-3">
 						<label for="recipient-name" class="col-form-label">Nome:</label>
 						<input type="text" name="name" class="form-control" id="recipient-name">
@@ -138,39 +138,6 @@
 						<input type="password" name="password" class="form-control" id="recipient-password">
 					</div>
 					<button type="submit" class="btn btn-primary">Criar</button>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- Modal Update User -->
-<div class="modal fade" id="modalUpdateUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-	aria-labelledby="modalUpdateUserLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="modalUpdateUserLabel">Modal title</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form action="/updateuser/{{id}}" method="post" id="formUpdateUser">
-					<div class="mb-3">
-						<label for="recipient-name" class="col-form-label">Nome:</label>
-						<input type="text" name="name" class="form-control" id="recipient-name">
-					</div>
-					<div class="mb-3">
-						<label for="recipient-email" class="col-form-label">Email:</label>
-						<input type="email" name="email" class="form-control" id="recipient-email">
-					</div>
-					<div class="mb-3">
-						<label for="recipient-password" class="col-form-label">Senha:</label>
-						<input type="password" name="password" class="form-control" id="recipient-password">
-					</div>
-					<button type="submit" class="btn btn-primary">Atualizar</button>
 				</form>
 			</div>
 			<div class="modal-footer">
