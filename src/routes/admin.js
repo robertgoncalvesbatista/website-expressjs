@@ -1,32 +1,11 @@
 const express = require("express")
 const router = express.Router()
 
-const jwt = require("./../config/jwt")
-
 const Admin = require("./../models/Admin");
 const User = require("./../models/User");
 
 const UserController = require("./../controllers/UserController");
 const AdminController = require("./../controllers/AdminController");
-
-const AuthMiddleware = async (req, res, next) => {
-    const [, token] = req.headers.authorization.split(" ")
-
-    try {
-        const payload = jwt.verify(token)
-        const user = await User.findById(payload.user)
-
-        if (!user) {
-            return res.status(401).send("Usuário não encontrado")
-        }
-
-        req.auth = user
-
-        next()
-    } catch (error) {
-        res.status(401, error).send("Error header authorization")
-    }
-}
 
 // Authentication
 router.post("/authenticate/user", async (req, res) => {
@@ -36,15 +15,15 @@ router.post("/authenticate/user", async (req, res) => {
         const user = await User.findOne({ email, password })
 
         if (!user) {
-            return res.status(401).send("Usuário não encontrado")
+            return res.status(401).render("error")
         }
 
-        // const token = jwt.sign({ user: user.id })
-        jwt.sign({ user: user._id })
+        const session = req.session
+        session.user_id = user._id;
 
-        res.redirect("/users")
+        res.redirect("/admin/users")
     } catch (error) {
-        res.status(401).send("Usuário não encontrado")
+        res.status(401).render("error")
     }
 })
 
@@ -55,49 +34,56 @@ router.post("/authenticate/admin", async (req, res) => {
         const user = await Admin.findOne({ email, password })
 
         if (!user) {
-            return res.status(401).send("Usuário não encontrado")
+            return res.status(401).render("error")
         }
 
-        // const token = jwt.sign({ user: user.id })
-        jwt.sign({ user: user._id })
-
-        res.redirect("/users")
+        res.render("admin/index", { token: token })
     } catch (error) {
-        res.status(401).send("Usuário não encontrado")
+        res.status(401).render("error")
     }
 })
 
+// Logout route
+router.get("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
+})
+
 // Administrator route
-router.get("/users", AuthMiddleware, async (req, res) => {
+router.get("/users", async (req, res) => {
     const users = await User.find();
     const admins = await Admin.find();
+
+    if (!req.session.user_id) {
+        res.redirect('/');
+    }
 
     res.render("admin/index", { users: users, admins: admins })
 })
 
 // Update routes
-router.get("/user/update/:_id", AuthMiddleware, async (req, res) => {
+router.get("/user/update/:_id", async (req, res) => {
     const user = await User.findOne({ _id: req.params._id });
 
     res.render("admin/update_user", { user: user })
 })
 
-router.get("/admin/update/:_id", AuthMiddleware, async (req, res) => {
+router.get("/admin/update/:_id", async (req, res) => {
     const admin = await Admin.findOne({ _id: req.params._id });
 
     res.render("admin/update_admin", { admin: admin })
 })
 
-// CRUD  user
-router.post("/createuser", AuthMiddleware, UserController.create)
-router.get("/readuser/:_id", AuthMiddleware, UserController.read)
-router.post("/updateuser/:_id", AuthMiddleware, UserController.update)
-router.get("/deleteuser/:_id", AuthMiddleware, UserController.destroy)
+// CRUD user
+router.post("/createuser", UserController.create)
+router.get("/readuser/:_id", UserController.read)
+router.post("/updateuser/:_id", UserController.update)
+router.get("/deleteuser/:_id", UserController.destroy)
 
 // CRUD admin
-router.post("/createadmin", AuthMiddleware, AdminController.create)
-router.get("/readadmin/:_id", AuthMiddleware, AdminController.read)
-router.post("/updateadmin/:_id", AuthMiddleware, AdminController.update)
-router.get("/deleteadmin/:_id", AuthMiddleware, AdminController.destroy)
+router.post("/createadmin", AdminController.create)
+router.get("/readadmin/:_id", AdminController.read)
+router.post("/updateadmin/:_id", AdminController.update)
+router.get("/deleteadmin/:_id", AdminController.destroy)
 
 module.exports = router;
