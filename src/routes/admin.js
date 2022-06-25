@@ -53,11 +53,11 @@ router.get("/logout", (req, res) => {
 router.get("/users", async (req, res) => {
     const users = await User.find();
     const admins = await Admin.find();
-
-    if (!req.session.user_id) {
-        res.redirect('/');
-    }
-
+    /*
+        if (!req.session.user_id) {
+            res.redirect('/');
+        }
+    */
     res.render("admin/index", { users: users, admins: admins })
 })
 
